@@ -107,6 +107,7 @@ function removeExtraLine(fileData){
             
         }
     }
+    
     return data;
 }
 
