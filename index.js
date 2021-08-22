@@ -26,35 +26,43 @@ for(let file of filenames)
 {
     let fileData = fs.readFileSync(file,"utf-8");
     for(let flag of flags){
-        if(flag == "-rs"){
+        if(flag == "-rspace"){
             fileData = fileData.split(" ").join("");
         }
-        if(flag == "-rn"){
+        if(flag == "-rnextline"){
             fileData = fileData.split("\r\n").join("");
         }
         
-        if(flag == "-rsc")
+        if(flag == "-rspecialword")
         {  // console.log(secondargument);
             for(let remove of secondargument)
             {
             fileData = fileData.split(remove).join("");
             }
         }
-        if(flag=="-s"){
+        if(flag=="-seq"){
             let data=addSequence(fileData);
             fileData = data;
            
         }
-        if(flag=="-sn"){
+        if(flag=="-seqwrnl"){
             let data=addSequenceTnel(fileData);
             fileData = data;
            
         }
-        if(flag=="-rel"){
+        if(flag=="-rextraline"){
             let ans=removeExtraLine(fileData);
             fileData = ans;
                         
         }
+       if(flag=="-copy"){
+        if(file!=filenames[0]){
+        let filedata = fs.readFileSync(filenames[0],"utf-8");    //fs.readFileSync(file,"utf-8");
+        //fs.writeFileSync(filenames[0],"");
+         filedata = filedata +"\r\n"+fileData;
+         fs.writeFileSync(filenames[0],filedata);
+        }
+    }
     }
     
     console.log(fileData);
